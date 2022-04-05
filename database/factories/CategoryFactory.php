@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             "cat_name" => $this->faker->name(),
-            "cat_image" => "http://127.0.0.1:8000/storage/caticon.png",
+            "cat_image" => "https://shop.orange.eg/content/images/thumbs/0002700_iphone-11_550.jpeg",
         ];
     }
 }
