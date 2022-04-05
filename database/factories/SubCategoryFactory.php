@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class SubCategoryFactory extends Factory
     public function definition()
     {
         return [
-            "cat_name" => "",
+            "cat_name" => Category::all()->random(1)->pluck("cat_name")[0],
             "subcat_name" => $this->faker->name(),
         ];
     }
