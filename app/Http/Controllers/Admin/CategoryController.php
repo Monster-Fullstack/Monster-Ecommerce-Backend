@@ -14,7 +14,7 @@ class CategoryController extends Controller
         $allCats = [];
         for ($i = 0; $i < count($cats); $i++) {
             $subs = SubCategory::where("category_id", $cats[$i]["id"])->get();
-            array_push($allCats, ["cat_name" => $cats[$i], "subs_names" => $subs]);
+            array_push($allCats, ["main_cat" => $cats[$i], "subs_names" => $subs]);
         }
 
         return $allCats;
@@ -24,7 +24,7 @@ class CategoryController extends Controller
     {
         $sub = SubCategory::findOrFail($id);
         $products = SubCategory::findOrFail($id)->products;
-        $all = ["cat_name" => $sub->subcat_name, "products" => $products];
+        $all = ["main_cat" => $sub->subcat_name, "products" => $products];
         return $all;
     }
 
@@ -32,8 +32,13 @@ class CategoryController extends Controller
     {
         $cat = Category::findOrFail($id);
         $sub = Category::findOrFail($id)->subCats;
-        $all = ["cat_name" => $cat, "sub_cats" => $sub];
+        $all = ["main_cat" => $cat, "sub_cats" => $sub];
         return $all;
     }
 
+    public function GetNewCats()
+    {
+        $cats = Category::orderBy("id", "desc")->take(14)->get();
+        return ["main_cat" => $cats];
+    }
 }

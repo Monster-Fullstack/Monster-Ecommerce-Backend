@@ -26,10 +26,18 @@ Route::get("/new_products", [ProductController::class, "newProducts"]);
 Route::get("/collection_products", [ProductController::class, "collectionProducts"]);
 // details product
 Route::get("/product/{id}", [ProductController::class, "getProduct"]);
+// best sellers products
+Route::get("products/best_sellers", [ProductController::class, "BestSellerProducts"]);
+// best products under 10 dollars
+Route::get("products/under/{price}", [ProductController::class, "UnderXDollars"]);
+// best products under 10 dollars
+Route::get("products/bestfor/{type}", [ProductController::class, "BestFor"]);
 // subcategory
 Route::get("/subcategory/{id}", [CategoryController::class, "GetSubCategory"]);
 // category
 Route::get("/category/{id}", [CategoryController::class, "GetCategory"]);
+// new categories
+Route::get("/new_categories", [CategoryController::class, "GetNewCats"]);
 
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------

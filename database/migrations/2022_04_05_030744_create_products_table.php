@@ -20,10 +20,13 @@ return new class extends Migration
             $table->decimal("price", 9, 3);
             $table->text("avilable_colors");
             $table->string("avilable_quantity");
+            $table->bigInteger("sells")->default(0);
             $table->string("main_image");
             $table->string("another_images")->nullable();
             $table->unsignedBigInteger("sub_cat_id");
             $table->foreign("sub_cat_id")->references("id")->on("sub_categories")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger("category_id");
+            $table->foreign("category_id")->references("id")->on("categories")->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
