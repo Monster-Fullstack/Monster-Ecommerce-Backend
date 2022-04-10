@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\VisitorController;
+use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ Route::get("/visitor", [VisitorController::class, "GetVisitorDetails"]);
 Route::get("/siteinfo", [SiteInfoController::class, "AllSites"]);
 // all category route
 Route::get("/category", [CategoryController::class, "AllCategories"]);
+// all category route
+Route::get("/categories_only", [CategoryController::class, "CategoriesOnly"]);
 // featured product
 Route::get("/featured_products", [ProductController::class, "featured"]);
 // new product
@@ -32,12 +35,24 @@ Route::get("products/best_sellers", [ProductController::class, "BestSellerProduc
 Route::get("products/under/{price}", [ProductController::class, "UnderXDollars"]);
 // best products under 10 dollars
 Route::get("products/bestfor/{type}", [ProductController::class, "BestFor"]);
+// just premium products
+Route::get("products/premium", [ProductController::class, "Premium"]);
+// just premium products
+Route::get("products/premium/count", [ProductController::class, "CountPremiumProducts"]);
 // subcategory
 Route::get("/subcategory/{id}", [CategoryController::class, "GetSubCategory"]);
+// most views subcategories
+Route::get("/subcategories/mostviews", [CategoryController::class, "MostViews"]);
+// subcategories only
+Route::get("/subcategories_only", [CategoryController::class, "SubCategoriesOnly"]);
 // category
 Route::get("/category/{id}", [CategoryController::class, "GetCategory"]);
 // new categories
 Route::get("/new_categories", [CategoryController::class, "GetNewCats"]);
+// get specific category only without sub or newProducts
+Route::get("/get/category_subcategory/{sub_id}", [CategoryController::class, "GetCatAndSubCat"]);
+// home slider
+Route::resource("/home/slider", HomeSliderController::class);
 
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------

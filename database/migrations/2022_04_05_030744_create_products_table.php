@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->text("description");
             $table->decimal("price", 9, 3);
+            $table->smallInteger("premium")->default(0);
             $table->text("avilable_colors");
             $table->string("avilable_quantity");
             $table->bigInteger("sells")->default(0);

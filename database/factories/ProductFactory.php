@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             "description" => $this->faker->paragraph(8),
             "price" => $this->faker->randomElement([rand(2.99, 44.99), rand(49.99, 3499.99)]),
             "sells" => rand(0, 250),
+            "premium" => $this->faker->randomElement([0, 1]),
             "avilable_colors" => $this->faker->text(),
             "avilable_quantity" => $q,
             "main_image" => "https://rukminim1.flixcart.com/image/416/416/kg8avm80/mobile/q/8/f/apple-iphone-12-dummyapplefsn-original-imafwg8drqaam5vu.jpeg?q=70",

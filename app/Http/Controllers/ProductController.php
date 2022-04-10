@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 
 class ProductController extends Controller
 {
@@ -53,6 +54,26 @@ class ProductController extends Controller
     public function BestFor($type)
     {
         $products = Category::where("cat_name", "like", "%" . $type . "%")->first()->products;
+        return $products;
+    }
+
+    public function Premium()
+    {
+        $products = Product::where("premium", 1)->paginate(10);
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $category = Category::findOrFail($products[$i]->category_id);
+            $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
+            array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
+        }
+
+        return $all;
+    }
+
+    public function CountPremiumProducts()
+    {
+        $products = Product::where("premium", 1)->count();
         return $products;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\SubCategory;
 
 class CategoryController extends Controller
@@ -40,5 +41,36 @@ class CategoryController extends Controller
     {
         $cats = Category::orderBy("id", "desc")->take(14)->get();
         return ["main_cat" => $cats];
+    }
+
+    public function MostViews()
+    {
+        $subs = SubCategory::orderBy("views", "desc")->take(3)->get();
+        $allSubs = [];
+        for ($i = 0; $i < count($subs); $i++) {
+            $products = Product::where("sub_cat_id", $subs[$i]["id"])->get()->take(3);
+            array_push($allSubs, ["sub_cat" => $subs[$i], "products" => $products]);
+        }
+
+        return $allSubs;
+    }
+
+    public function CategoriesOnly()
+    {
+        $cats = Category::all();
+        return $cats;
+    }
+
+    public function SubCategoriesOnly()
+    {
+        $subs = SubCategory::all();
+        return $subs;
+    }
+
+    public function GetCatAndSubCat($sub_id)
+    {
+        $sub = SubCategory::findOrFail($sub_id);
+        $cat = Category::findOrFail($sub->category_id);
+        return ["cat" => $cat->cat_name, "sub" => $sub->subcat_name];
     }
 }
