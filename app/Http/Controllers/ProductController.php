@@ -34,7 +34,11 @@ class ProductController extends Controller
     public function getProduct($id)
     {
         $product = Product::findOrFail($id);
-        return $product;
+        $all = [];
+        $category = Category::findOrFail($product->category_id)->cat_name;
+        $subcategory = SubCategory::findOrFail($product->sub_cat_id)->subcat_name;
+        $all = ["cat" => $category, "sub" => $subcategory, "product" => $product];
+        return $all;
     }
 
     public function BestSellerProducts()

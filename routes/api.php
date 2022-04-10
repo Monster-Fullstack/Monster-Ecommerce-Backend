@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\HomeSliderController;
+use App\Http\Controllers\MagicWordsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +51,9 @@ Route::get("/category/{id}", [CategoryController::class, "GetCategory"]);
 // new categories
 Route::get("/new_categories", [CategoryController::class, "GetNewCats"]);
 // magic words
-Route::get("/magic_words/{cat_id}", [CategoryController::class, "GetMagicWords"]);
+Route::get("/magic_words/get_magic/{cat_id}", [CategoryController::class, "GetMagicWords"]);
+// get cats of magicword
+Route::get("/magic_words/get_cats/{word_name}", [MagicWordsController::class, "GetCatsByMagic"]);
 // home slider
 Route::resource("/home/slider", HomeSliderController::class);
 
