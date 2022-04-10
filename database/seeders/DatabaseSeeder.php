@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\MagicWords;
 use App\Models\Product;
 use App\Models\SiteInfo;
 use App\Models\SubCategory;
@@ -20,8 +21,16 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(50)->create();
         SiteInfo::factory(1)->create();
-        Category::factory(50)->create();
+        $cats = Category::factory(50)->create();
         SubCategory::factory(100)->create();
         Product::factory(800)->create();
+        MagicWords::factory(100)->create();
+        foreach ($cats as $cat) {
+            $words_ids = [];
+            $words_ids[] = MagicWords::all()->random()->id;
+            $words_ids[] = MagicWords::all()->random()->id;
+            $words_ids[] = MagicWords::all()->random()->id;
+            $cat->words()->sync($words_ids);
+        }
     }
 }

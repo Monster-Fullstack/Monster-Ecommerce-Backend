@@ -49,8 +49,8 @@ Route::get("/subcategories_only", [CategoryController::class, "SubCategoriesOnly
 Route::get("/category/{id}", [CategoryController::class, "GetCategory"]);
 // new categories
 Route::get("/new_categories", [CategoryController::class, "GetNewCats"]);
-// get specific category only without sub or newProducts
-Route::get("/get/category_subcategory/{sub_id}", [CategoryController::class, "GetCatAndSubCat"]);
+// magic words
+Route::get("/magic_words/{cat_id}", [CategoryController::class, "GetMagicWords"]);
 // home slider
 Route::resource("/home/slider", HomeSliderController::class);
 

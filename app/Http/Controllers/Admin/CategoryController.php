@@ -73,4 +73,10 @@ class CategoryController extends Controller
         $cat = Category::findOrFail($sub->category_id);
         return ["cat" => $cat->cat_name, "sub" => $sub->subcat_name];
     }
+
+    public function GetMagicWords($cat_id)
+    {
+        $magics = Category::findOrFail($cat_id)->words;
+        return $magics;
+    }
 }
