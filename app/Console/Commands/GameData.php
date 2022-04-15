@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Category;
+use App\Models\Game;
 use App\Models\MagicWords;
 use App\Models\Product;
 use App\Models\SubCategory;
@@ -129,10 +130,96 @@ class GameData extends Command
         ]);
 
         // end crazy pc cat
+        // games cat
+        $cat2 = Category::insert([
+            "cat_name" => "Games",
+            "cat_image" => "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/most-popular-video-games-of-2022-1642612227.png?crop=1.00xw:1.00xh;0,0&resize=980:*",
+        ]);
 
-        // start for pc games
+        $horror = SubCategory::insert([
+            "subcat_name" => "Horror Games",
+            "views" => 95000,
+            "main_image" => "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2021/04/The-10-Hardest-Horror-Games-Ranked.jpg",
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "Outlast 2",
+            "description" => "This the really horror game",
+            "price" => 29.99,
+            "download_link" => "https://uploadhaven.com/download/8bdf6ce5da6055bb65af950955484f13",
+            "sells" => 2500000,
+            "main_image" => "https://cdn-cf.gamivo.com/image_cover.jpg?f=17574&n=7905723384692063.jpg&h=7404c240925023bfe92a240a3ea2b522",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "Resident Evil 7",
+            "description" => "This the really horror game",
+            "price" => 59.99,
+            "download_link" => "https://uploadhaven.com/download/f795e56ceebc2b47821b51d17ce27c72",
+            "sells" => 1000000,
+            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShjqgJWuQIokNzLzSm9pGFpbJMJiit-MtVHMkgxDELmFILZAmLO46LUuuDIrQzy-yv-T0&usqp=CAU",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "Resident Evil 3 Remake",
+            "description" => "This the really horror game",
+            "price" => 59.99,
+            "download_link" => "https://uploadhaven.com/download/9220c76742d652a9f69abeab0d8c3d85",
+            "sells" => 1000000,
+            "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/header.jpg?t=1644282235",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        $action = SubCategory::insert([
+            "subcat_name" => "Action Games",
+            "views" => 25000,
+            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3Qh-42wV3rCSE-dtjTgAx_CgDoQIDnMqX1-mYFOcaUF9P4mXfC50b_1brpCra7Kn3sE&usqp=CAU",
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "The Witcher 3",
+            "description" => "This the really action game",
+            "price" => 39.99,
+            "download_link" => "https://uploadhaven.com/download/18983557d6120db874d5f0f9b2b87ca9",
+            "sells" => 5000000,
+            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnCvplVgyRkD8AmdStKMi6iVnrMpwuIzqyq623rnfYyR6RTmSnhYwjiqEDxcavnzAIV0c&usqp=CAU",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "assassin's creed valhalla",
+            "description" => "This the really action game",
+            "price" => 39.99,
+            "download_link" => "https://uploadhaven.com/download/21e3c5f14bc4f127992c6cc914ba6756",
+            "sells" => 5000000,
+            "main_image" => "https://s1.gaming-cdn.com/images/products/6147/616x353/assassin-s-creed-valhalla-pc-game-ubisoft-connect-europe-cover.jpg",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        Game::insert([
+            "name" => "shadow of the tomb raider",
+            "description" => "This the really action game",
+            "price" => 39.99,
+            "download_link" => "https://uploadhaven.com/download/3055a331e34f19370fb04c833c52cba4",
+            "sells" => 5000000,
+            "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/750920/capsule_616x353.jpg?t=1644931091",
+            "sub_cat_id" => SubCategory::latest("id")->first()->id,
+            "category_id" => Category::latest("id")->first()->id,
+        ]);
+
+        // add those categories to magic word
         $cats = [];
-        $cats[] = Category::latest("id")->first()->id;
+        $cats[] = Category::latest("id")->get()[0]->id;
+        $cats[] = Category::latest("id")->get()[1]->id;
         MagicWords::latest("id")->first()->categories()->sync($cats);
     }
 }

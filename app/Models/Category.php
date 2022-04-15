@@ -20,6 +20,11 @@ class Category extends Model
         return $this->hasMany(Product::class, "category_id");
     }
 
+    public function games()
+    {
+        return $this->hasMany(Game::class, "category_id");
+    }
+
     public function words()
     {
         return $this->belongsToMany(MagicWords::class, "category_magic_word");
