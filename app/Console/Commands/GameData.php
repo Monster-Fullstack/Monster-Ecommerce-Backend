@@ -133,11 +133,13 @@ class GameData extends Command
         // games cat
         $cat2 = Category::insert([
             "cat_name" => "Games",
+            "game" => true,
             "cat_image" => "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/most-popular-video-games-of-2022-1642612227.png?crop=1.00xw:1.00xh;0,0&resize=980:*",
         ]);
 
         $horror = SubCategory::insert([
             "subcat_name" => "Horror Games",
+            "game" => true,
             "views" => 95000,
             "main_image" => "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2021/04/The-10-Hardest-Horror-Games-Ranked.jpg",
             "category_id" => Category::latest("id")->first()->id,
@@ -179,6 +181,7 @@ class GameData extends Command
         $action = SubCategory::insert([
             "subcat_name" => "Action Games",
             "views" => 25000,
+            "game" => true,
             "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3Qh-42wV3rCSE-dtjTgAx_CgDoQIDnMqX1-mYFOcaUF9P4mXfC50b_1brpCra7Kn3sE&usqp=CAU",
             "category_id" => Category::latest("id")->first()->id,
         ]);

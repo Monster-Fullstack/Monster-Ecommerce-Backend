@@ -79,4 +79,11 @@ class CategoryController extends Controller
         $magics = Category::findOrFail($cat_id)->words;
         return $magics;
     }
+
+    public function GetSubCategoryGames($sub_id)
+    {
+        $subcat = SubCategory::findOrFail($sub_id);
+        $games = $subcat->games;
+        return ["main_cat" => $subcat->subcat_name, "products" => $games];
+    }
 }

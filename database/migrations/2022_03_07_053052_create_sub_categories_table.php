@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("subcat_name")->unique();
             $table->bigInteger("views");
+            $table->boolean("game")->default(false);
             $table->text("main_image");
             $table->unsignedBigInteger("category_id");
             $table->foreign("category_id")->references("id")->on("categories")->cascadeOnDelete()->cascadeOnUpdate();

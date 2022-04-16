@@ -42,6 +42,8 @@ Route::get("products/premium", [ProductController::class, "Premium"]);
 Route::get("products/premium/count", [ProductController::class, "CountPremiumProducts"]);
 // subcategory
 Route::get("/subcategory/{id}", [CategoryController::class, "GetSubCategory"]);
+// subcategory games
+Route::get("/subcategory-games/{id}", [CategoryController::class, "GetSubCategoryGames"]);
 // most views subcategories
 Route::get("/subcategories/mostviews", [CategoryController::class, "MostViews"]);
 // subcategories only

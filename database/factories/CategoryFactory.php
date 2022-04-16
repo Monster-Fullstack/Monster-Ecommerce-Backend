@@ -23,6 +23,7 @@ class CategoryFactory extends Factory
 
         return [
             "cat_name" => $this->faker->name(),
+            "game" => false,
             "cat_image" => "https://shop.orange.eg/content/images/thumbs/0002700_iphone-11_550.jpeg",
         ];
     }
