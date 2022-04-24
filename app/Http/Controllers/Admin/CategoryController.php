@@ -84,6 +84,6 @@ class CategoryController extends Controller
     {
         $subcat = SubCategory::findOrFail($sub_id);
         $games = $subcat->games;
-        return ["main_cat" => $subcat->subcat_name, "products" => $games];
+        return ["main_cat" => $subcat->subcat_name, "games" => $games];
     }
 }

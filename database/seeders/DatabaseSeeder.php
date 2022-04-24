@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Game;
 use App\Models\MagicWords;
+use App\Models\Notification;
 use App\Models\Product;
 use App\Models\SiteInfo;
 use App\Models\SubCategory;
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
             $words_ids[] = MagicWords::all()->random()->id;
             $cat->words()->sync($words_ids);
         }
+        Notification::factory(300)->create();
     }
 }

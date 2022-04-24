@@ -12,11 +12,16 @@ class Game extends Model
 
     public function Subcategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, "sub_cat_id");
     }
 
     public function Category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function Photos()
+    {
+        return $this->belongsToMany(Photo::class);
     }
 }

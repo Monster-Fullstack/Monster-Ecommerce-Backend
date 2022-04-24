@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Category;
 use App\Models\Game;
+use App\Models\HomeSlider;
 use App\Models\MagicWords;
+use App\Models\Photo;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Console\Command;
@@ -16,7 +18,7 @@ class GameData extends Command
      *
      * @var string
      */
-    protected $signature = 'GamerData';
+    protected $signature = 'GameData';
 
     /**
      * The console command description.
@@ -112,7 +114,7 @@ class GameData extends Command
         $ramSub = SubCategory::insert([
             "subcat_name" => "Ram",
             "views" => 25000,
-            "main_image" => "https://images.unsplash.com/photo-1592664474505-51c549ad15c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+            "main_image" => "https://images.unsplash.com/photo-1602664474505-51c549ad15c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
             "category_id" => Category::latest("id")->first()->id,
         ]);
 
@@ -148,7 +150,7 @@ class GameData extends Command
         Game::insert([
             "name" => "Outlast 2",
             "description" => "This the really horror game",
-            "price" => 29.99,
+            "price" => 29,
             "download_link" => "https://uploadhaven.com/download/8bdf6ce5da6055bb65af950955484f13",
             "sells" => 2500000,
             "main_image" => "https://cdn-cf.gamivo.com/image_cover.jpg?f=17574&n=7905723384692063.jpg&h=7404c240925023bfe92a240a3ea2b522",
@@ -156,10 +158,38 @@ class GameData extends Command
             "category_id" => Category::latest("id")->first()->id,
         ]);
 
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_391bfd739898fd31ec7fa0c0b7658f18b7202286.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_3f641157a8ca9a168260bfdaf42a753821bc71e5.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        Photo::insert([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
         Game::insert([
             "name" => "Resident Evil 7",
             "description" => "This the really horror game",
-            "price" => 59.99,
+            "price" => 60,
             "download_link" => "https://uploadhaven.com/download/f795e56ceebc2b47821b51d17ce27c72",
             "sells" => 1000000,
             "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShjqgJWuQIokNzLzSm9pGFpbJMJiit-MtVHMkgxDELmFILZAmLO46LUuuDIrQzy-yv-T0&usqp=CAU",
@@ -170,7 +200,7 @@ class GameData extends Command
         Game::insert([
             "name" => "Resident Evil 3 Remake",
             "description" => "This the really horror game",
-            "price" => 59.99,
+            "price" => 60,
             "download_link" => "https://uploadhaven.com/download/9220c76742d652a9f69abeab0d8c3d85",
             "sells" => 1000000,
             "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/header.jpg?t=1644282235",
@@ -189,7 +219,7 @@ class GameData extends Command
         Game::insert([
             "name" => "The Witcher 3",
             "description" => "This the really action game",
-            "price" => 39.99,
+            "price" => 40,
             "download_link" => "https://uploadhaven.com/download/18983557d6120db874d5f0f9b2b87ca9",
             "sells" => 5000000,
             "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnCvplVgyRkD8AmdStKMi6iVnrMpwuIzqyq623rnfYyR6RTmSnhYwjiqEDxcavnzAIV0c&usqp=CAU",
@@ -200,7 +230,7 @@ class GameData extends Command
         Game::insert([
             "name" => "assassin's creed valhalla",
             "description" => "This the really action game",
-            "price" => 39.99,
+            "price" => 40,
             "download_link" => "https://uploadhaven.com/download/21e3c5f14bc4f127992c6cc914ba6756",
             "sells" => 5000000,
             "main_image" => "https://s1.gaming-cdn.com/images/products/6147/616x353/assassin-s-creed-valhalla-pc-game-ubisoft-connect-europe-cover.jpg",
@@ -211,7 +241,7 @@ class GameData extends Command
         Game::insert([
             "name" => "shadow of the tomb raider",
             "description" => "This the really action game",
-            "price" => 39.99,
+            "price" => 40,
             "download_link" => "https://uploadhaven.com/download/3055a331e34f19370fb04c833c52cba4",
             "sells" => 5000000,
             "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/750920/capsule_616x353.jpg?t=1644931091",
@@ -224,5 +254,14 @@ class GameData extends Command
         $cats[] = Category::latest("id")->get()[0]->id;
         $cats[] = Category::latest("id")->get()[1]->id;
         MagicWords::latest("id")->first()->categories()->sync($cats);
+        HomeSlider::insert([
+            "slider_image" => "https://images.unsplash.com/photo-1576562331281-d09e46af9854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+        ]);
+        HomeSlider::insert([
+            "slider_image" => "https://images.unsplash.com/photo-1578916171728-46686eac8d58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+        ]);
+        HomeSlider::insert([
+            "slider_image" => "https://images3.alphacoders.com/108/thumb-1920-1082409.png",
+        ]);
     }
 }

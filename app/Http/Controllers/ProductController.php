@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Game;
 use App\Models\Product;
 use App\Models\SubCategory;
 
@@ -79,5 +80,25 @@ class ProductController extends Controller
     {
         $products = Product::where("premium", 1)->count();
         return $products;
+    }
+
+    public function search($key)
+    {
+        $products = Product::where("name", "LIKE", "%" . $key . "%")->select(array("name", "id"))->get();
+        return $products;
+    }
+
+    public function searchComplete($key)
+    {
+        $products = Product::where("name", "LIKE", "%" . $key . "%")->get();
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $category = Category::findOrFail($products[$i]->category_id);
+            $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
+            array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
+        }
+
+        return $all;
     }
 }

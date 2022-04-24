@@ -24,7 +24,7 @@ class GameFactory extends Factory
         return [
             "name" => $this->faker->name(),
             "description" => $this->faker->paragraph(),
-            "price" => rand(14.99, 59.99),
+            "price" => $this->faker->randomElement([rand(14.99, 59.99), 0]),
             "sells" => rand(1000, 9000000),
             "main_image" => "https://image.api.playstation.com/cdn/EP0102/CUSA09171_00/Vl6kGbTmofHzUHT8hsEmv8zQfkr4DpDN.png",
             "download_link" => $this->faker->paragraph(1),
