@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\VisitorController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\MagicWordsController;
@@ -14,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+// Start Authentication Routes
+// Login Route
+Route::post("/login", [AuthController::class, "Login"]);
+// Register Route
+Route::post("/register", [AuthController::class, "Register"]);
+// Forget Route
+Route::post("/forget", [AuthController::class, "Forget"]);
+// Reset Route
+Route::post("/reset", [AuthController::class, "Reset"]);
+// Reset Route
+Route::post("/logout", [AuthController::class, "Logout"]);
+// to get the user data by the user token
+Route::get("/user", [AuthController::class, "UserData"])->middleware("auth:api");
+// End Authentication Routes
 
 // GET REQUESTS
 // get visitor details
