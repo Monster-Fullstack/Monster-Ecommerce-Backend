@@ -57,10 +57,9 @@ class GameData extends Command
             "description" => "This the really very good card",
             "price" => 200,
             "premium" => 0,
-            "avilable_colors" => "black",
-            "avilable_quantity" => 300,
+            "colors" => "black",
+            "quantity" => 300,
             "sells" => 260,
-            "main_image" => "https://m.media-amazon.com/images/I/81IdRzJZHeL._AC_SY450_.jpg",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -70,10 +69,9 @@ class GameData extends Command
             "description" => "This the really very good card",
             "price" => 60,
             "premium" => 1,
-            "avilable_colors" => "black,brown",
-            "avilable_quantity" => 60,
+            "colors" => "black,brown",
+            "quantity" => 60,
             "sells" => 55,
-            "main_image" => "https://m.media-amazon.com/images/I/51avPJeBVKL._AC_.jpg",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -90,10 +88,9 @@ class GameData extends Command
             "description" => "This the really very good processor",
             "price" => 2500,
             "premium" => 1,
-            "avilable_colors" => "black,gold",
-            "avilable_quantity" => 60,
+            "colors" => "black,gold",
+            "quantity" => 60,
             "sells" => 45,
-            "main_image" => "https://sigma-computer.com/image/products/161580903702.webp",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -103,10 +100,9 @@ class GameData extends Command
             "description" => "This the really very good processor",
             "price" => 120,
             "premium" => 1,
-            "avilable_colors" => "black,red",
-            "avilable_quantity" => 200,
+            "colors" => "black,red",
+            "quantity" => 200,
             "sells" => 198,
-            "main_image" => "https://m.media-amazon.com/images/I/412hZ79rMZL._AC_SY780_.jpg",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -123,10 +119,9 @@ class GameData extends Command
             "description" => "This the really very good Ram",
             "price" => 55,
             "premium" => 1,
-            "avilable_colors" => "black",
-            "avilable_quantity" => 300,
+            "colors" => "black",
+            "quantity" => 300,
             "sells" => 30,
-            "main_image" => "https://static.labeb.com/test/images/catalogs/93268/tybjkqb5y2b-w450.jpg",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -153,7 +148,6 @@ class GameData extends Command
             "price" => 29,
             "download_link" => "https://uploadhaven.com/download/8bdf6ce5da6055bb65af950955484f13",
             "sells" => 2500000,
-            "main_image" => "https://cdn-cf.gamivo.com/image_cover.jpg?f=17574&n=7905723384692063.jpg&h=7404c240925023bfe92a240a3ea2b522",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -186,13 +180,17 @@ class GameData extends Command
             "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
         ]);
 
+        Photo::insert([
+            "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
+            "main_image" => 1,
+        ]);
+
         Game::insert([
             "name" => "Resident Evil 7",
             "description" => "This the really horror game",
             "price" => 60,
             "download_link" => "https://uploadhaven.com/download/f795e56ceebc2b47821b51d17ce27c72",
             "sells" => 1000000,
-            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShjqgJWuQIokNzLzSm9pGFpbJMJiit-MtVHMkgxDELmFILZAmLO46LUuuDIrQzy-yv-T0&usqp=CAU",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -203,7 +201,6 @@ class GameData extends Command
             "price" => 60,
             "download_link" => "https://uploadhaven.com/download/9220c76742d652a9f69abeab0d8c3d85",
             "sells" => 1000000,
-            "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/header.jpg?t=1644282235",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -212,7 +209,7 @@ class GameData extends Command
             "subcat_name" => "Action Games",
             "views" => 25000,
             "game" => true,
-            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3Qh-42wV3rCSE-dtjTgAx_CgDoQIDnMqX1-mYFOcaUF9P4mXfC50b_1brpCra7Kn3sE&usqp=CAU",
+            "main_image" => "https://images.unsplash.com/photo-1555618565-9f2b0323a10d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
             "category_id" => Category::latest("id")->first()->id,
         ]);
 
@@ -222,7 +219,6 @@ class GameData extends Command
             "price" => 40,
             "download_link" => "https://uploadhaven.com/download/18983557d6120db874d5f0f9b2b87ca9",
             "sells" => 5000000,
-            "main_image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnCvplVgyRkD8AmdStKMi6iVnrMpwuIzqyq623rnfYyR6RTmSnhYwjiqEDxcavnzAIV0c&usqp=CAU",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -233,7 +229,6 @@ class GameData extends Command
             "price" => 40,
             "download_link" => "https://uploadhaven.com/download/21e3c5f14bc4f127992c6cc914ba6756",
             "sells" => 5000000,
-            "main_image" => "https://s1.gaming-cdn.com/images/products/6147/616x353/assassin-s-creed-valhalla-pc-game-ubisoft-connect-europe-cover.jpg",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
@@ -244,7 +239,6 @@ class GameData extends Command
             "price" => 40,
             "download_link" => "https://uploadhaven.com/download/3055a331e34f19370fb04c833c52cba4",
             "sells" => 5000000,
-            "main_image" => "https://cdn.cloudflare.steamstatic.com/steam/apps/750920/capsule_616x353.jpg?t=1644931091",
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);

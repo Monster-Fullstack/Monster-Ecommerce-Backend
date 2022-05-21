@@ -19,4 +19,14 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function Photos()
+    {
+        return $this->morphToMany(Photo::class, "photoable");
+    }
+
+    public function Users()
+    {
+        return $this->belongsToMany(User::class, "product_user");
+    }
 }

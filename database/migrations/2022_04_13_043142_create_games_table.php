@@ -20,7 +20,6 @@ return new class extends Migration
             $table->decimal("price", 9, 3);
             $table->integer("sells");
             $table->string("download_link");
-            $table->string("main_image");
             $table->unsignedBigInteger("sub_cat_id");
             $table->foreign("sub_cat_id")->references("id")->on("sub_categories")->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger("category_id");

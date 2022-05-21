@@ -19,11 +19,9 @@ return new class extends Migration
             $table->text("description");
             $table->decimal("price", 9, 2);
             $table->smallInteger("premium")->default(0);
-            $table->text("avilable_colors");
-            $table->string("avilable_quantity");
+            $table->text("colors");
+            $table->string("quantity");
             $table->bigInteger("sells")->default(0);
-            $table->string("main_image");
-            $table->string("another_images")->nullable();
             $table->unsignedBigInteger("sub_cat_id");
             $table->foreign("sub_cat_id")->references("id")->on("sub_categories")->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger("category_id");

@@ -20,13 +20,27 @@ class CategoryController extends Controller
 
         return $allCats;
     }
-
     public function GetSubCategory($id)
     {
         $sub = SubCategory::findOrFail($id);
         $products = SubCategory::findOrFail($id)->products;
-        $all = ["main_cat" => $sub->subcat_name, "products" => $products];
-        return $all;
+        $allProducts = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($allProducts, $products[$i]);
+
+        }
+
+        return ["main_cat" => $sub->subcat_name, "products" => $allProducts];
     }
 
     public function GetCategory($id)

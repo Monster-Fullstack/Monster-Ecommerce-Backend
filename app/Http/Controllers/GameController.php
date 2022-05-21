@@ -12,8 +12,9 @@ class GameController extends Controller
     {
         $game = Game::findOrFail($id);
         $sub = SubCategory::findOrFail($game->sub_cat_id)->subcat_name;
-        $game["photos"] = $game->Photos;
+        $photos = $game->Photos;
         $game["sub"] = $sub;
+        $game["photos"] = $photos;
         return $game;
     }
 

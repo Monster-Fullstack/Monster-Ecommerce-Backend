@@ -22,6 +22,6 @@ class Game extends Model
 
     public function Photos()
     {
-        return $this->belongsToMany(Photo::class);
+        return $this->morphToMany(Photo::class, "photoable");
     }
 }

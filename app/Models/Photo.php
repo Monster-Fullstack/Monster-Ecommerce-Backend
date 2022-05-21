@@ -10,8 +10,13 @@ class Photo extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function games()
+    public function Games()
     {
-        return $this->belongsToMany(Game::class);
+        return $this->morphedByMany(Game::class, "photoable");
+    }
+
+    public function Products()
+    {
+        return $this->morphedByMany(Product::class, "photoable");
     }
 }

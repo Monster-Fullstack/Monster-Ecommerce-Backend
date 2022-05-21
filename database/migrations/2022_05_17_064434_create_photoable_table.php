@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->smallInteger("main_image")->default(0);
+        Schema::create('photoables', function (Blueprint $table) {
+            $table->integer("photo_id");
+            $table->integer("photoable_id");
+            $table->string("photoable_type");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('photoable');
     }
 };

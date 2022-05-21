@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Game;
 use App\Models\Product;
 use App\Models\SubCategory;
 
@@ -17,19 +16,67 @@ class ProductController extends Controller
     public function featured()
     {
         $products = Product::all()->random(6);
-        return $products;
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function newProducts()
     {
-        $newProduct = Product::orderBy("id", "desc")->get()->take(20);
-        return $newProduct;
+        $products = Product::orderBy("id", "desc")->get()->take(20);
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function collectionProducts()
     {
         $products = Product::all()->random(15);
-        return $products;
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function getProduct($id)
@@ -38,6 +85,14 @@ class ProductController extends Controller
         $all = [];
         $category = Category::findOrFail($product->category_id)->cat_name;
         $subcategory = SubCategory::findOrFail($product->sub_cat_id)->subcat_name;
+        $photos = $product->Photos;
+        $photo = "";
+        foreach ($photos as $photo) {
+            if ($photo->main_image === 1) {
+                $photo = $photo->name;
+            }
+        }
+        $product["main_image"] = $photo;
         $all = ["cat" => $category, "sub" => $subcategory, "product" => $product];
         return $all;
     }
@@ -45,7 +100,23 @@ class ProductController extends Controller
     public function BestSellerProducts()
     {
         $products = Product::orderBy("sells", "desc")->take(20)->get();
-        return $products;
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function UnderXDollars($price)
@@ -53,13 +124,45 @@ class ProductController extends Controller
         $string = explode("_", $price);
 
         $products = Product::where("price", "<=", intval($string[0]))->orderBy("price", $string[1])->take(20)->get();
-        return $products;
+
+        $all = [];
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function BestFor($type)
     {
         $products = Category::where("cat_name", "like", "%" . $type . "%")->first()->products;
-        return $products;
+        $all = [];
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
+            array_push($all, $products[$i]);
+
+        }
+
+        return $all;
     }
 
     public function Premium()
@@ -70,7 +173,17 @@ class ProductController extends Controller
         for ($i = 0; $i < count($products); $i++) {
             $category = Category::findOrFail($products[$i]->category_id);
             $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
             array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
+
         }
 
         return $all;
@@ -96,7 +209,17 @@ class ProductController extends Controller
         for ($i = 0; $i < count($products); $i++) {
             $category = Category::findOrFail($products[$i]->category_id);
             $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
+            $photos = $products[$i]->Photos;
+            $photo = "";
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $photo = $photo->name;
+                }
+            }
+
+            $products[$i]["main_image"] = $photo;
             array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
+
         }
 
         return $all;

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SiteInfoController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\MagicWordsController;
@@ -30,6 +31,15 @@ Route::post("/logout", [AuthController::class, "Logout"]);
 // to get the user data by the user token
 Route::get("/user", [AuthController::class, "UserData"])->middleware("auth:api");
 // End Authentication Routes
+
+// Cart Section
+// get the products of the cart
+Route::get("/cart", [CartController::class, "GetProducts"])->middleware("auth:api");
+// add the product to the cart
+Route::post("/cart", [CartController::class, "AddProduct"])->middleware("auth:api");
+// remove the product from the cart
+Route::post("/cart_delete", [CartController::class, "RemoveProduct"])->middleware("auth:api");
+// Cart Section
 
 // GET REQUESTS
 // get visitor details
