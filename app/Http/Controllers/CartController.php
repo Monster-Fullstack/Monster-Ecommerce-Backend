@@ -96,4 +96,10 @@ class CartController extends Controller
             ], 401);
         }
     }
+
+    public function ProductsCount()
+    {
+        $user = Auth::user();
+        return DB::table("product_user")->where("user_id", $user->id)->count();
+    }
 }

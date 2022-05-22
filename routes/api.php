@@ -35,6 +35,8 @@ Route::get("/user", [AuthController::class, "UserData"])->middleware("auth:api")
 // Cart Section
 // get the products of the cart
 Route::get("/cart", [CartController::class, "GetProducts"])->middleware("auth:api");
+// get the count of products in cart
+Route::get("/cart/count", [CartController::class, "ProductsCount"])->middleware("auth:api");
 // add the product to the cart
 Route::post("/cart", [CartController::class, "AddProduct"])->middleware("auth:api");
 // remove the product from the cart

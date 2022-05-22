@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

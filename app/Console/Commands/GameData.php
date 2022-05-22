@@ -10,6 +10,7 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class GameData extends Command
 {
@@ -242,6 +243,18 @@ class GameData extends Command
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
+
+        $photo = Photo::create([
+            "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
+            "main_image" => 1,
+        ]);
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
 
         // add those categories to magic word
         $cats = [];

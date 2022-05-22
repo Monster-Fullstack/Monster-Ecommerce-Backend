@@ -20,14 +20,11 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -42,14 +39,11 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -64,14 +58,11 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -86,13 +77,11 @@ class ProductController extends Controller
         $category = Category::findOrFail($product->category_id)->cat_name;
         $subcategory = SubCategory::findOrFail($product->sub_cat_id)->subcat_name;
         $photos = $product->Photos;
-        $photo = "";
         foreach ($photos as $photo) {
             if ($photo->main_image === 1) {
-                $photo = $photo->name;
+                $product["main_image"] = $photo;
             }
         }
-        $product["main_image"] = $photo;
         $all = ["cat" => $category, "sub" => $subcategory, "product" => $product];
         return $all;
     }
@@ -104,14 +93,11 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -129,14 +115,11 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -150,14 +133,11 @@ class ProductController extends Controller
         $all = [];
         for ($i = 0; $i < count($products); $i++) {
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, $products[$i]);
 
         }
@@ -174,14 +154,11 @@ class ProductController extends Controller
             $category = Category::findOrFail($products[$i]->category_id);
             $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
 
         }
@@ -210,14 +187,11 @@ class ProductController extends Controller
             $category = Category::findOrFail($products[$i]->category_id);
             $subcategory = SubCategory::findOrFail($products[$i]->sub_cat_id);
             $photos = $products[$i]->Photos;
-            $photo = "";
             foreach ($photos as $photo) {
                 if ($photo->main_image === 1) {
-                    $photo = $photo->name;
+                    $products[$i]["main_image"] = $photo;
                 }
             }
-
-            $products[$i]["main_image"] = $photo;
             array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $products[$i]]);
 
         }
