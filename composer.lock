@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b309a3097e7c5e7242d4233b8523eed4",
+    "content-hash": "5248e4455114a9576a4ae0a2a6977549",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,61 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "ayman-elmalah/laravel-myfatoorah",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ayman-elmalah/laravel-myfatoorah.git",
+                "reference": "2056342b0b170d954d0ff6f50a6770c9f70c5ad2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ayman-elmalah/laravel-myfatoorah/zipball/2056342b0b170d954d0ff6f50a6770c9f70c5ad2",
+                "reference": "2056342b0b170d954d0ff6f50a6770c9f70c5ad2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AymanElmalah\\MyFatoorah\\MyFatoorahServiceProvider"
+                    ],
+                    "aliases": {
+                        "MyFatoorah": "AymanElmalah\\MyFatoorah\\Facades\\MyFatoorah"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AymanElmalah\\MyFatoorah\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ayman Elmalah",
+                    "email": "aymanelmalah77@gmail.com"
+                }
+            ],
+            "description": "My fatoorah api wrapper ",
+            "support": {
+                "issues": "https://github.com/ayman-elmalah/laravel-myfatoorah/issues",
+                "source": "https://github.com/ayman-elmalah/laravel-myfatoorah/tree/v1.0.4"
+            },
+            "time": "2022-04-29T11:48:09+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",

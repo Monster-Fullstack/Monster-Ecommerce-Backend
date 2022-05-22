@@ -248,6 +248,15 @@ class GameData extends Command
             "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
             "main_image" => 1,
         ]);
+
+        $photo2 = Photo::create([
+            "name" => "https://m.media-amazon.com/images/I/6185WYzzvBL.jpg",
+        ]);
+
+        $photo3 = Photo::create([
+            "name" => "https://m.media-amazon.com/images/I/81+jA70AYgL._AC_SL1500_.jpg",
+        ]);
+
         foreach (Product::all() as $product) {
             DB::table("photoables")->insert([
                 "photo_id" => $photo->id,
@@ -256,6 +265,21 @@ class GameData extends Command
             ]);
         }
 
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo2->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
+
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo3->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
         // add those categories to magic word
         $cats = [];
         $cats[] = Category::latest("id")->get()[0]->id;

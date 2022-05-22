@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Cart Table
 return new class extends Migration
 {
     /**
@@ -14,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_user', function (Blueprint $table) {
+        Schema::create('transaction', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("product_id");
+            $table->bigInteger("InvoiceId");
             $table->bigInteger("user_id");
-            $table->string("color");
-            $table->integer("quantity");
-            $table->integer("total");
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_user');
+        Schema::dropIfExists('transaction');
     }
 };

@@ -9,7 +9,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\MagicWordsController;
+use App\Http\Controllers\MyFatoorahController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,12 @@ Route::post("/logout", [AuthController::class, "Logout"]);
 Route::get("/user", [AuthController::class, "UserData"])->middleware("auth:api");
 // End Authentication Routes
 
+// Payments
+Route::get('pay/{price}', [MyFatoorahController::class, 'index'])->middleware("auth:api");
+Route::get('payment/callback', [MyFatoorahController::class, 'callback']);
+Route::get('payment/error', [MyFatoorahController::class, 'error']);
+// Payments
+
 // Cart Section
 // get the products of the cart
 Route::get("/cart", [CartController::class, "GetProducts"])->middleware("auth:api");
@@ -42,6 +50,8 @@ Route::post("/cart", [CartController::class, "AddProduct"])->middleware("auth:ap
 // remove the product from the cart
 Route::post("/cart_delete", [CartController::class, "RemoveProduct"])->middleware("auth:api");
 // Cart Section
+// Orders
+Route::get("/orders", [OrderController::class, "index"])->middleware("auth:api");
 
 // GET REQUESTS
 // get visitor details

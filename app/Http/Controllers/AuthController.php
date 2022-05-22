@@ -47,7 +47,10 @@ class AuthController extends Controller
                 "name" => $request->name,
                 "email" => $request->email,
                 "password" => Hash::make($request->password),
+                "phone_number" => $request->phone_number,
+                "phone_country" => $request->phone_country,
             ]);
+
             $token = $user->createToken("app")->accessToken;
 
             return response([
