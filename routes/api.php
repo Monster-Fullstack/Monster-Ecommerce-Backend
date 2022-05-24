@@ -12,13 +12,12 @@ use App\Http\Controllers\MagicWordsController;
 use App\Http\Controllers\MyFatoorahController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+Auth::routes(["verify" => true]);
 // Start Authentication Routes
 // Login Route
 Route::post("/login", [AuthController::class, "Login"]);
@@ -34,11 +33,18 @@ Route::post("/logout", [AuthController::class, "Logout"]);
 Route::get("/user", [AuthController::class, "UserData"])->middleware("auth:api");
 // End Authentication Routes
 
+// Verify the user
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+// Verify the user
+
 // Payments
 Route::get('pay/{price}', [MyFatoorahController::class, 'index'])->middleware("auth:api");
 Route::get('payment/callback', [MyFatoorahController::class, 'callback']);
 Route::get('payment/error', [MyFatoorahController::class, 'error']);
 // Payments
+
+// to get the image from database to the api
+Route::get('photo/{photoName}', [PhotoController::class, "image"]);
 
 // Cart Section
 // get the products of the cart

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ForgetMail extends Mailable
+class VerifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,6 +29,6 @@ class ForgetMail extends Mailable
     public function build()
     {
         $token = $this->token;
-        return $this->from("support@monstore.com")->view("emails.forget", compact("token"))->subject("Password Reset");
+        return $this->from("support@monstore.com")->view("emails.emailVerificationEmail", compact("token"))->subject("Account Verify");
     }
 }
