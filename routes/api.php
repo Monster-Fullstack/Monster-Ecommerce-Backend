@@ -90,6 +90,8 @@ Route::get("games/free/{id}", [GameController::class, "getFree"]);
 /**
  * Products
  */
+// related products
+Route::get("products/related/{subcat}", [ProductController::class, "RelatedProducts"]);
 // best sellers products
 Route::get("products/best_sellers", [ProductController::class, "BestSellerProducts"]);
 // best products under 10 dollars
@@ -100,6 +102,16 @@ Route::get("products/bestfor/{type}", [ProductController::class, "BestFor"]);
 Route::get("products/premium", [ProductController::class, "Premium"]);
 // just premium products
 Route::get("products/premium/count", [ProductController::class, "CountPremiumProducts"]);
+// product reviews
+Route::get("reviews/product/{product}", [ProductController::class, "reviews"]);
+// product reviews
+Route::post("reviews/product", [ProductController::class, "SendReview"])->middleware("auth:api");
+// edit review
+Route::post("reviews/edit", [ProductController::class, "EditReview"])->middleware("auth:api");
+// delete review
+Route::get("reviews/delete/{review_id}", [ProductController::class, "DeleteReview"])->middleware("auth:api");
+// product reviews
+Route::get("reviews/is_user_payed_product/{product_id}", [ProductController::class, "IsUserPayed"])->middleware("auth:api");
 /**
  * Sub Category
  */

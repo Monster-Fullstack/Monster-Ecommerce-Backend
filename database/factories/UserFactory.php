@@ -24,10 +24,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $path = "storage/photos/users";
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'profile_photo_path' => $path . "/" . "user.jpg",
             "phone_number" => $this->faker->unique()->phoneNumber(),
             "phone_country" => $this->faker->randomElement(["+966", "+20", "+1"]),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

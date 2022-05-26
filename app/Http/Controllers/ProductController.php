@@ -2,12 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    /**
+     * RelatedProducts
+     *
+     * @param request $subcat
+     * @return void
+     */
+    public function RelatedProducts($subcat)
+    {
+        // to get the products randomly
+        $products = Product::where("sub_cat_id", $subcat)->inRandomOrder()->limit(8)->get();
+
+        for ($i = 0; $i < count($products); $i++) {
+            $photos = $products[$i]->Photos;
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $products[$i]["main_image"] = $photo;
+                }
+            }
+        }
+
+        return $products;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -198,4 +226,95 @@ class ProductController extends Controller
 
         return $all;
     }
+
+    public function reviews(Product $product)
+    {
+        $reviews = DB::table("product_reviews")->where("product_id", $product->id)->get();
+
+        $all = [];
+        for ($i = 0; $i < count($reviews); $i++) {
+            $reviewer = User::where("id", $reviews[$i]->user_id)->first();
+            array_push($all, [
+                "reviewer_name" => $reviewer->name,
+                "reviewer_image" => $reviewer->profile_photo_url,
+                "reviewer_comment" => $reviews[$i]->comment,
+                "reviewer_rate" => $reviews[$i]->rate,
+            ]);
+        }
+
+        return $all;
+    }
+
+    public function IsUserPayed($product_id)
+    {
+        $user = Auth::user();
+        $checkPayed = DB::table("orders")
+            ->where("user_id", $user->id)
+            ->where("product_id", $product_id)
+            ->first() ? true : false;
+        $checkThisIsFirstComment = DB::table("product_reviews")
+            ->where("user_id", $user->id)
+            ->where("product_id", $product_id)
+            ->first() ? false : true;
+        // the user can post a review
+        if ($checkPayed && $checkThisIsFirstComment) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function SendReview(ReviewRequest $request)
+    {
+        $user = Auth::user();
+        $check = $this->IsUserPayed($request->product_id);
+
+        if ($check) {
+            DB::table("product_reviews")->insert([
+                "product_id" => $request->product_id,
+                "user_id" => $user->id,
+                "comment" => $request->comment,
+                "rate" => $request->rate,
+            ]);
+
+            return response([
+                "message" => "Your review has been sent successfully",
+            ]);
+        } else {
+            return response([
+                "message" => "Your can't send your review, buy this product first",
+            ]);
+        }
+
+    }
+
+    public function EditReview(ReviewRequest $request)
+    {
+        $user = Auth::user();
+        try {
+            DB::table("product_reviews")
+                ->where("user_id", $user->id)
+                ->where("product_id", $request->product_id)
+                ->update([
+                    "comment" => $request->comment,
+                    "rate" => $request->rate,
+                ]);
+            return response([
+                "message" => "Your review has been updated successfully!",
+            ]);
+        } catch (Exception $error) {
+            return response([
+                "message" => $error->getMessage(),
+            ]);
+        }
+    }
+
+    public function DeleteReview($review_id)
+    {
+        DB::table("product_reviews")->delete($review_id);
+        return response([
+            "message" => "Your review has been deleted successfully!",
+        ]);
+    }
+
 }
