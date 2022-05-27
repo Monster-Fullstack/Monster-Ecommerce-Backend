@@ -39,4 +39,10 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, "product_reviews");
     }
+
+    public function ProductsFavorites()
+    {
+        return $this->belongsToMany(User::class, "products_favorites");
+    }
+
 }

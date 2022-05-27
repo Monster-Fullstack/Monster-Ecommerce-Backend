@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
     public function AllCategories()
     {
-        $cats = Category::orderBy("id", "desc")->get();
+        // get all categories except the games category
+        $cats = Category::orderBy("id", "desc")->where("cat_name", "!=", "Games")->get();
         $allCats = [];
         for ($i = 0; $i < count($cats); $i++) {
             $subs = SubCategory::where("category_id", $cats[$i]["id"])->get();
@@ -59,10 +60,21 @@ class CategoryController extends Controller
 
     public function MostViews()
     {
-        $subs = SubCategory::orderBy("views", "desc")->take(3)->get();
+        // get the games category
+        $games_cat = Category::where("cat_name", "Games")->first();
+        //
+        $subs = SubCategory::orderBy("views", "desc")->where("category_id", "!=", $games_cat->id)->take(3)->get();
         $allSubs = [];
         for ($i = 0; $i < count($subs); $i++) {
             $products = Product::where("sub_cat_id", $subs[$i]["id"])->get()->take(3);
+            for ($x = 0; $x < count($products); $x++) {
+                $photos = $products[$x]->Photos;
+                foreach ($photos as $photo) {
+                    if ($photo->main_image === 1) {
+                        $products[$x]["main_image"] = $photo;
+                    }
+                }
+            }
             array_push($allSubs, ["sub_cat" => $subs[$i], "products" => $products]);
         }
 
@@ -98,6 +110,14 @@ class CategoryController extends Controller
     {
         $subcat = SubCategory::findOrFail($sub_id);
         $games = $subcat->games;
+        foreach ($games as $game) {
+            $photos = $game->Photos;
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $game["main_image"] = $photo;
+                }
+            }
+        }
         return ["main_cat" => $subcat->subcat_name, "games" => $games];
     }
 }

@@ -317,4 +317,81 @@ class ProductController extends Controller
         ]);
     }
 
+    public function Favorite()
+    {
+        $user = Auth::user();
+        $all = [];
+        foreach ($user->ProductsFavorites as $product) {
+            $category = Category::findOrFail($product->category_id);
+            $subcategory = SubCategory::findOrFail($product->sub_cat_id);
+
+            $photos = $product->Photos;
+            foreach ($photos as $photo) {
+                if ($photo->main_image === 1) {
+                    $product["main_image"] = $photo;
+                }
+            }
+            array_push($all, ["cat" => $category->cat_name, "sub" => $subcategory->subcat_name, "product" => $product]);
+        }
+        return $all;
+    }
+
+    public function AddToFavorite($product_id)
+    {
+        $user = Auth::user();
+
+        try {
+            $checkIfUserAlreadyHaveInFavorites = DB::table("products_favorites")->where("user_id", $user->id)->where("product_id", $product_id)->exists();
+            if (!$checkIfUserAlreadyHaveInFavorites) {
+                DB::table("products_favorites")->insert([
+                    "user_id" => $user->id,
+                    "product_id" => $product_id,
+                ]);
+
+                return response([
+                    "message" => "The product is added to your favourites successfully",
+                ]);
+            } else {
+                return response([
+                    "message" => "This product is already in your favourites!",
+                ], 401);
+            }
+        } catch (Exception $error) {
+            return response([
+                "message" => $error->getMessage(),
+            ]);
+        }
+    }
+
+    public function RemoveFavorite($id)
+    {
+        DB::table("products_favorites")->delete($id);
+
+        return response([
+            "message" => "The product is removed from your favourites successfully",
+        ]);
+    }
+
+    public function FavoritesCount()
+    {
+        $user = Auth::user();
+        $favs = DB::table("products_favorites")->where("user_id", $user->id)->count();
+        return $favs;
+    }
+
+    public function RemoveAllFavorites()
+    {
+        $user = Auth::user();
+        try {
+            DB::table("products_favorites")->where("user_id", $user->id)->delete();
+            return response([
+                "message" => "All the products have been removed from your favourites successfully",
+            ]);
+        } catch (Exception $error) {
+            return response([
+                "message" => $error->getMessage(),
+            ]);
+        }
+    }
+
 }

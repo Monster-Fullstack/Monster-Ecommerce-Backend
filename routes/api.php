@@ -100,8 +100,18 @@ Route::get("products/under/{price}", [ProductController::class, "UnderXDollars"]
 Route::get("products/bestfor/{type}", [ProductController::class, "BestFor"]);
 // just premium products
 Route::get("products/premium", [ProductController::class, "Premium"]);
-// just premium products
+// just premium products count
 Route::get("products/premium/count", [ProductController::class, "CountPremiumProducts"]);
+// user favourite products
+Route::get("products/favorites", [ProductController::class, "Favorite"])->middleware("auth:api");
+// user favourite products
+Route::get("products/favorites/add/{product_id}", [ProductController::class, "AddToFavorite"])->middleware("auth:api");
+// user favourite products
+Route::get("products/favorites/delete/{id}", [ProductController::class, "RemoveFavorite"])->middleware("auth:api");
+// get the count of products in favs
+Route::get("products/favorites/count", [ProductController::class, "FavoritesCount"])->middleware("auth:api");
+// to delete all the products that in the favorites
+Route::get("products/favorites/all", [ProductController::class, "RemoveAllFavorites"])->middleware("auth:api");
 // product reviews
 Route::get("reviews/product/{product}", [ProductController::class, "reviews"]);
 // product reviews

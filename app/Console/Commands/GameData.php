@@ -127,6 +127,45 @@ class GameData extends Command
             "category_id" => Category::latest("id")->first()->id,
         ]);
 
+        $photo = Photo::create([
+            "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
+            "main_image" => 1,
+        ]);
+
+        $photo2 = Photo::create([
+            "name" => "https://m.media-amazon.com/images/I/6185WYzzvBL.jpg",
+        ]);
+
+        $photo3 = Photo::create([
+            "name" => "https://m.media-amazon.com/images/I/81+jA70AYgL._AC_SL1500_.jpg",
+        ]);
+
+        // photos for products
+
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
+
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo2->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
+
+        foreach (Product::all() as $product) {
+            DB::table("photoables")->insert([
+                "photo_id" => $photo3->id,
+                "photoable_id" => $product->id,
+                "photoable_type" => "App\Models\Product",
+            ]);
+        }
+
         // end crazy pc cat
         // games cat
         $cat2 = Category::insert([
@@ -152,40 +191,6 @@ class GameData extends Command
             "sub_cat_id" => SubCategory::latest("id")->first()->id,
             "category_id" => Category::latest("id")->first()->id,
         ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_391bfd739898fd31ec7fa0c0b7658f18b7202286.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_3f641157a8ca9a168260bfdaf42a753821bc71e5.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
-        ]);
-
-        Photo::insert([
-            "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
-            "main_image" => 1,
-        ]);
-
         Game::insert([
             "name" => "Resident Evil 7",
             "description" => "This the really horror game",
@@ -244,42 +249,81 @@ class GameData extends Command
             "category_id" => Category::latest("id")->first()->id,
         ]);
 
-        $photo = Photo::create([
-            "name" => "https://www.egprices.com/images/large/asus_geforce_gtx_750ti_performance.jpg",
+        $game_photo1 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_391bfd739898fd31ec7fa0c0b7658f18b7202286.600x338.jpg?t=1618944453",
             "main_image" => 1,
         ]);
 
-        $photo2 = Photo::create([
-            "name" => "https://m.media-amazon.com/images/I/6185WYzzvBL.jpg",
+        $game_photo3 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_3f641157a8ca9a168260bfdaf42a753821bc71e5.600x338.jpg?t=1618944453",
         ]);
 
-        $photo3 = Photo::create([
-            "name" => "https://m.media-amazon.com/images/I/81+jA70AYgL._AC_SL1500_.jpg",
+        $game_photo4 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
         ]);
 
-        foreach (Product::all() as $product) {
+        $game_photo5 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        $game_photo6 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        $game_photo7 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        $game_photo8 = Photo::create([
+            "name" => "https://cdn.akamai.steamstatic.com/steam/apps/414700/ss_2a2ee79384c9100469a61336937b8dba6a8a7d26.600x338.jpg?t=1618944453",
+        ]);
+
+        // photos for games
+
+        foreach (Game::all() as $game) {
             DB::table("photoables")->insert([
-                "photo_id" => $photo->id,
-                "photoable_id" => $product->id,
-                "photoable_type" => "App\Models\Product",
+                "photo_id" => $game_photo1->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo3->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo4->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo5->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo6->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo7->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
+            ]);
+        }foreach (Game::all() as $game) {
+            DB::table("photoables")->insert([
+                "photo_id" => $game_photo8->id,
+                "photoable_id" => $game->id,
+                "photoable_type" => "App\Models\Game",
             ]);
         }
 
-        foreach (Product::all() as $product) {
-            DB::table("photoables")->insert([
-                "photo_id" => $photo2->id,
-                "photoable_id" => $product->id,
-                "photoable_type" => "App\Models\Product",
-            ]);
-        }
-
-        foreach (Product::all() as $product) {
-            DB::table("photoables")->insert([
-                "photo_id" => $photo3->id,
-                "photoable_id" => $product->id,
-                "photoable_type" => "App\Models\Product",
-            ]);
-        }
         // add those categories to magic word
         $cats = [];
         $cats[] = Category::latest("id")->get()[0]->id;
