@@ -248,7 +248,7 @@ class ProductController extends Controller
     public function IsUserPayed($product_id)
     {
         $user = Auth::user();
-        $checkPayed = DB::table("orders")
+        $checkPayed = DB::table("orders_products")
             ->where("user_id", $user->id)
             ->where("product_id", $product_id)
             ->first() ? true : false;

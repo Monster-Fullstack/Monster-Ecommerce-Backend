@@ -24,4 +24,14 @@ class Game extends Model
     {
         return $this->morphToMany(Photo::class, "photoable");
     }
+    
+    public function Users()
+    {
+        return $this->belongsToMany(User::class, "game_user");
+    }
+    
+    public function UsersInOrders()
+    {
+        return $this->morphToMany(User::class, "orderable");
+    }
 }

@@ -47,14 +47,18 @@ Route::get('payment/error', [MyFatoorahController::class, 'error']);
 Route::get('photo/{photoName}', [PhotoController::class, "image"]);
 
 // Cart Section
-// get the products of the cart
-Route::get("/cart", [CartController::class, "GetProducts"])->middleware("auth:api");
+// get the items of the cart
+Route::get("/cart", [CartController::class, "GetItems"])->middleware("auth:api");
 // get the count of products in cart
-Route::get("/cart/count", [CartController::class, "ProductsCount"])->middleware("auth:api");
+Route::get("/cart/count", [CartController::class, "itemsCount"])->middleware("auth:api");
 // add the product to the cart
-Route::post("/cart", [CartController::class, "AddProduct"])->middleware("auth:api");
+Route::post("/cart/product", [CartController::class, "AddProduct"])->middleware("auth:api");
+// add the game to the cart
+Route::post("/cart/game", [CartController::class, "AddGame"])->middleware("auth:api");
 // remove the product from the cart
-Route::post("/cart_delete", [CartController::class, "RemoveProduct"])->middleware("auth:api");
+Route::post("/cart/product/delete", [CartController::class, "RemoveProduct"])->middleware("auth:api");
+// remove the game from the cart
+Route::post("/cart/game/delete", [CartController::class, "RemoveGame"])->middleware("auth:api");
 // Cart Section
 // Orders
 Route::get("/orders", [OrderController::class, "index"])->middleware("auth:api");

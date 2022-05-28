@@ -68,9 +68,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Product::class, "product_user");
     }
 
-    public function Orders()
+    public function Games()
     {
-        return $this->belongsToMany(Product::class, "orders");
+        return $this->belongsToMany(Game::class, "game_user");
+    }
+
+    public function ProductOrders()
+    {
+        return $this->belongsToMany(Product::class, "orders_products");
+    }
+
+    public function GamesOrders()
+    {
+        return $this->belongsToMany(Game::class, "orders_games");
     }
 
     public function ProductsFavorites()

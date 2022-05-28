@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddGamesToCartRequest;
 use App\Http\Requests\AddToCartRequest;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,34 +11,56 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function GetProducts()
+    public function GetItems()
     {
         try {
             $user = Auth::user();
-            $all = DB::table("product_user")->where("user_id", $user->id)->get();
+            $all = [];
+
+            $allProducts = DB::table("product_user")->where("user_id", $user->id)->get();
 
             $products = $user->products;
-            $totalPrices = [];
+
+            $totalPrice = [];
 
             for ($i = 0; $i < count($products); $i++) {
-                $products[$i]["color"] = $all[$i]->color;
-                $products[$i]["quantity"] = $all[$i]->quantity;
-                $total = intval($all[$i]->total);
+                $products[$i]["color"] = $allProducts[$i]->color;
+                $products[$i]["quantity"] = $allProducts[$i]->quantity;
+                $total = intval($allProducts[$i]->total);
                 $products[$i]["total"] = $total;
                 $photos = $products[$i]->Photos;
-                array_push($totalPrices, $total);
+                array_push($totalPrice, $total);
                 foreach ($photos as $photo) {
                     if ($photo->main_image === 1) {
                         $products[$i]["main_image"] = $photo;
                     }
                 }
+
+                array_push($all, $products[$i]);
             }
 
-            // for calculating the total price for all products
-            $total = array_sum($totalPrices);
+            // all games that exists in the cart
+            $games = $user->games;
 
+            // loop to get prices and put them in the $totalPrices
+            for ($i = 0; $i < count($games); $i++) {
+                $total = intval($games[$i]->price);
+                $photos = $games[$i]->Photos;
+                array_push($totalPrice, $total);
+                foreach ($photos as $photo) {
+                    if ($photo->main_image === 1) {
+                        $games[$i]["main_image"] = $photo;
+                    }
+                }
+                array_push($all, $games[$i]);
+            }
+
+            // for calculating the total price for all products & games
+            $total = array_sum($totalPrice);
+
+            // return the items [ games, products ] and the total
             return response([
-                "products" => $products,
+                "all" => $all,
                 "total" => $total,
             ]);
 
@@ -72,6 +95,28 @@ class CartController extends Controller
         }
     }
 
+    public function AddGame(AddGamesToCartRequest $request)
+    {
+        try {
+            $user = Auth::user();
+            $total = $request->price;
+            DB::table("game_user")->insert([
+                "game_id" => $request->game_id,
+                "user_id" => $user->id,
+                "total" => $total,
+            ]);
+
+            return response([
+                "message" => "The game is added to the cart successfully",
+            ]);
+
+        } catch (Exception $e) {
+            return response([
+                "message" => $e->getMessage(),
+            ], 401);
+        }
+    }
+
     public function RemoveProduct(Request $request)
     {
         $validated = $request->validate([
@@ -81,11 +126,10 @@ class CartController extends Controller
         try {
             $product_id = $request->product_id;
             $user = Auth::user();
-            $product = DB::table("product_user")
+            DB::table("product_user")
                 ->where("user_id", $user->id)
                 ->where("product_id", $product_id)
-                ->first();
-            DB::table("product_user")->delete($product->id);
+                ->delete();
 
             return response([
                 "message" => "The product removed successfully",
@@ -97,9 +141,39 @@ class CartController extends Controller
         }
     }
 
-    public function ProductsCount()
+    public function RemoveGame(Request $request)
+    {
+        $validated = $request->validate([
+            "game_id" => "required",
+        ]);
+
+        try {
+            $game_id = $request->game_id;
+            $user = Auth::user();
+
+            DB::table("game_user")
+                ->where("user_id", $user->id)
+                ->where("game_id", $game_id)
+                ->delete();
+
+            return response([
+                "message" => "The game removed successfully",
+            ]);
+        } catch (Exception $e) {
+            return response([
+                "message" => $e->getMessage(),
+            ], 401);
+        }
+    }
+
+    public function itemsCount()
     {
         $user = Auth::user();
-        return DB::table("product_user")->where("user_id", $user->id)->count();
+        $products = DB::table("product_user")->where("user_id", $user->id)->count();
+        $games = DB::table("game_user")->where("user_id", $user->id)->count();
+
+        // calc them
+        $total = $products + $games;
+        return $total;
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->text("description");
-            $table->decimal("price", 9, 3);
+            $table->decimal("price", 9, 2);
             $table->integer("sells");
             $table->string("download_link");
             $table->unsignedBigInteger("sub_cat_id");

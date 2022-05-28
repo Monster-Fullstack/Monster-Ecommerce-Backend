@@ -32,7 +32,7 @@ class Product extends Model
 
     public function UsersInOrders()
     {
-        return $this->belongsToMany(User::class, "orders");
+        return $this->morphToMany(User::class, "orderable");
     }
 
     public function Reviewers()

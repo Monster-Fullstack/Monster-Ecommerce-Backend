@@ -12,16 +12,20 @@ class OrderController extends Controller
     {
         try {
             $user = Auth::user();
-            $all = DB::table("orders")->where("user_id", $user->id)->get();
-
-            $products = $user->orders;
+            // products with games
+            $all = [];
+            // the total price
             $totalPrices = [];
+            // get the products
+            $allProducts = DB::table("orders_products")->where("user_id", $user->id)->get();
+
+            $products = $user->ProductOrders;
 
             for ($i = 0; $i < count($products); $i++) {
-                $products[$i]["color"] = $all[$i]->color;
-                $products[$i]["quantity"] = $all[$i]->quantity;
-                $products[$i]["status"] = $all[$i]->status;
-                $total = intval($all[$i]->total);
+                $products[$i]["color"] = $allProducts[$i]->color;
+                $products[$i]["quantity"] = $allProducts[$i]->quantity;
+                $products[$i]["status"] = $allProducts[$i]->status;
+                $total = intval($allProducts[$i]->total);
                 $products[$i]["total"] = $total;
                 $photos = $products[$i]->Photos;
                 array_push($totalPrices, $total);
@@ -30,13 +34,33 @@ class OrderController extends Controller
                         $products[$i]["main_image"] = $photo;
                     }
                 }
+                array_push($all, $products[$i]);
+            }
+
+            // get the orders of games
+            $allGames = DB::table("orders_games")->where("user_id", $user->id)->get();
+
+            // get the games
+            $games = $user->GamesOrders;
+
+            for ($i = 0; $i < count($games); $i++) {
+                $total = intval($allGames[$i]->total);
+                $games[$i]["status"] = $allGames[$i]->status;
+                $photos = $games[$i]->Photos;
+                array_push($totalPrices, $total);
+                foreach ($photos as $photo) {
+                    if ($photo->main_image === 1) {
+                        $games[$i]["main_image"] = $photo;
+                    }
+                }
+                array_push($all, $games[$i]);
             }
 
             // for calculating the total price for all products
             $total = array_sum($totalPrices);
 
             return response([
-                "products" => $products,
+                "all" => $all,
                 "total" => $total,
             ]);
 

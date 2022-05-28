@@ -62,18 +62,30 @@ class MyFatoorahController extends Controller
 
                 $allProductsInCart = DB::table("product_user")->where("user_id", $id)->get();
 
+                $allGameInCart = DB::table("game_user")->where("user_id", $id)->get();
+
                 foreach ($allProductsInCart as $product) {
-                    DB::table("orders")->insert([
+                    DB::table("orders_products")->insert([
                         "user_id" => $id,
-                        "product_id" => $product->id,
+                        "product_id" => $product->product_id,
                         "total" => $product->total,
                         "color" => $product->color,
                         "quantity" => $product->quantity,
                     ]);
                 }
 
-                // delete all the products inside the cart
+                foreach ($allGameInCart as $game) {
+                    DB::table("orders_games")->insert([
+                        "user_id" => $id,
+                        "game_id" => $game->game_id,
+                        "total" => $game->total,
+                    ]);
+                }
+
+                // delete all the products and games those are inside the cart
                 DB::table("product_user")->where("user_id", $id)->delete();
+
+                DB::table("game_user")->where("user_id", $id)->delete();
 
                 header("Location: http://localhost:3000/orders");
                 exit();
